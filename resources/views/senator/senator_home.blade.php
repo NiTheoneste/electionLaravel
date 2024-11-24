@@ -65,5 +65,9 @@
     @else
         <span>No Records</span>
     @endif
+    <br>
+    <form method="GET" action="/senator/add">
+        <input type="submit" value="+ Add New Senator">
+    </form>
 </body>
 </html>

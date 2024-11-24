@@ -65,5 +65,9 @@
     @else
         <span>No Records</span>
     @endif
+    <br>
+    <form method="GET" action="/presElector/add">
+        <input type="submit" value="+ Add New Presidential Elector">
+    </form>
 </body>
 </html>

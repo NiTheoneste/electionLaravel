@@ -88,6 +88,7 @@ class StateController extends Controller
 
     public function delete($pk){
         $state = State::findOrFail($pk);
+        Storage::disk('public')->delete($state->flag->imageUrl);
         $state->delete();
         return redirect('/state')->with('success', "State deleted successfully");
     }

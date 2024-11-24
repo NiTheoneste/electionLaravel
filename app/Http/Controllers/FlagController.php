@@ -48,6 +48,7 @@ class FlagController extends Controller
 
     public function delete($pk){
         $flag = Flag::find($pk);
+        Storage::disk('public')->delete($flag->imageUrl);
         $flag->delete();
         return redirect('/flag')->with('success', "Flag deleted successfully");
     }

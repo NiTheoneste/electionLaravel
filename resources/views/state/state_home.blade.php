@@ -18,6 +18,7 @@
         </style>
     </head>
     <body>
+        <h1 style="text-align: center;">States of the US</h1>
         @if($states->count() > 0 )
             <table class='table table-bordered table-responsive'>
                 <tr>
@@ -59,5 +60,9 @@
         @else
             <span>No Records</span>
         @endif
+        <br>
+        <form method="GET" action="/state/add">
+            <input type="submit" value="+ Add New State">
+        </form>
     </body>
 </html>

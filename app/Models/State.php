@@ -13,7 +13,6 @@ class State extends Model
 
     public function flag()
     {
-
         return $this->hasOne(Flag::class);
     }
     
