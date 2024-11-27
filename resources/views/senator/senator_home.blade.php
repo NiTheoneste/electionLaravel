@@ -18,7 +18,8 @@
     </style>
 </head>
 <body>
-@if($senators->count() > 0 )
+<h1 style="text-align: center;">Senators of the States</h1>
+    @if($senators->count() > 0 )
         <table class='table table-bordered table-responsive'>
             <tr>
             <th>#</th>

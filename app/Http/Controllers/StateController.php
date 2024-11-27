@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Flag;
 use App\Models\State;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
-class StateController extends Controller
+class StateController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [new Middleware(middleware:'auth')];
+    }
+
     public function showHome(){
         $states = State::all();
         return view('state/state_home', ['states' => $states]);

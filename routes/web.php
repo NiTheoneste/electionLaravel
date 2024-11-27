@@ -1,16 +1,21 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FlagController;
 use App\Http\Controllers\GovernorController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\PresElectorController;
 use App\Http\Controllers\SenatorController;
 use App\Http\Controllers\StateController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/state', [StateController::class, 'showHome']);
 Route::get('/state/add', [StateController::class, 'showAddPage']);
@@ -54,3 +59,11 @@ Route::post('/presElector/create', [PresElectorController::class, 'createAndAdd'
 Route::get('/presElector/edit{pk}', [PresElectorController::class, 'showEditPage'])->name('presElector.edit');
 Route::put('/presElector/update{pk}', [PresElectorController::class, 'update'])->name('presElector.update');
 Route::delete('/presElector/delete{pk}', [PresElectorController::class, 'delete'])->name('presElector.delete');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

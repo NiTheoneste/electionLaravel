@@ -6,9 +6,16 @@ use App\Models\Party;
 use App\Models\Senator;
 use App\Models\State;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class SenatorController extends Controller
+class SenatorController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [new Middleware(middleware:'auth')];
+    }
+
     public function showHome(){
         $senators = Senator::all();
         return view('senator/senator_home', ['senators' => $senators]);

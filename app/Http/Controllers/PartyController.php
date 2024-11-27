@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Party;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PartyController extends Controller
+class PartyController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [new Middleware(middleware:'auth')];
+    }
+
     public function showHome(){
         $parties = Party::all();
         return view('party/party_home', ['parties'=> $parties]);

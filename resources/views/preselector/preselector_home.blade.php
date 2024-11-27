@@ -18,7 +18,8 @@
     </style>
 </head>
 <body>
-@if($pres_electors->count() > 0 )
+<h1 style="text-align: center;">Presidential Electors of the States</h1>
+    @if($pres_electors->count() > 0 )
         <table class='table table-bordered table-responsive'>
             <tr>
             <th>#</th>

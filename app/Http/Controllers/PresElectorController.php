@@ -6,9 +6,16 @@ use App\Models\Party;
 use App\Models\PresElector;
 use App\Models\State;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PresElectorController extends Controller
+class PresElectorController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [new Middleware(middleware:'auth')];
+    }
+
     public function showHome(){
         $pres_electors = PresElector::all(); 
         return view('preselector/preselector_home', ['pres_electors' => $pres_electors]);

@@ -6,9 +6,16 @@ use App\Models\Governor;
 use App\Models\Party;
 use App\Models\State;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class GovernorController extends Controller
+class GovernorController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [new Middleware(middleware:'auth')];        
+    }
+
     public function showHome(){
         $governors = Governor::all();
         return view('governor/governor_home', ['governors'=>$governors]);

@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Flag;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
-class FlagController extends Controller
+class FlagController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [new Middleware(middleware:'auth')];
+    }
+
     public function showHome(){
         $flags = Flag::all();
         return view('flag/flag_home', ['flags' => $flags]);

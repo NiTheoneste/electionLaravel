@@ -18,6 +18,7 @@
         </style>
     </head>
     <body>
+    <h1 style="text-align: center;">Parties of the US</h1>
         @if($parties->count() > 0 )
             <table class='table table-bordered table-responsive'>
                 <tr>

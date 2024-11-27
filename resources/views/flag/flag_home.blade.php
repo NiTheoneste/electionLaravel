@@ -18,6 +18,7 @@
         </style>
     </head>
     <body>
+        <h1 style="text-align: center;">Flags of the States</h1>
         @if($flags->count() > 0 )
             <table class='table table-bordered table-responsive'>
                 <tr>

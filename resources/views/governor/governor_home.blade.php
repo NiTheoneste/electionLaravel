@@ -18,6 +18,7 @@
         </style>
     </head>
     <body>
+    <h1 style="text-align: center;">Governors of the States</h1>
         @if($governors->count() > 0 )
             <table>
                 <tr>
