@@ -6,6 +6,12 @@
     <title>Edit state</title>
 </head>
 <body>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Edit state') }}
+            </h2>
+        </x-slot>
         @if($errors->any())
             @foreach($errors->all() as $error)
                 <div class='text-red-500'>{{$error}}</div>
@@ -65,5 +71,6 @@
                 </table>
             </form>
         </div>
-    </body>
+    </x-app-layout>
+</body>
 </html>

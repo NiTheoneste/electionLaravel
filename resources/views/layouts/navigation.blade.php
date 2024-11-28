@@ -6,7 +6,6 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
@@ -15,7 +14,26 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('states')" :active="request()->routeIs('states')">
+                        {{ __('States') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('flags')" :active="request()->routeIs('flags')">
+                        {{ __('Flags') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('governors')" :active="request()->routeIs('governor')">
+                        {{ __('Governors') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('senators')" :active="request()->routeIs('senators')">
+                        {{ __('Senators') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('presElectors')" :active="request()->routeIs('presElectors')">
+                        {{ __('Presidential Electors') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('congressMembers')" :active="request()->routeIs('congressMembers')">
+                        {{ __('Congress Members') }}
+                    </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -69,6 +87,24 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('states')" :active="request()->routeIs('states')">
+                        {{ __('States') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('flags')" :active="request()->routeIs('flags')">
+                {{ __('Flags') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('governors')" :active="request()->routeIs('governor')">
+                {{ __('Governors') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('senators')" :active="request()->routeIs('senators')">
+                {{ __('Senators') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('presElectors')" :active="request()->routeIs('presElectors')">
+                {{ __('Presidential Electors') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('congressMembers')" :active="request()->routeIs('congressMembers')">
+                {{ __('Congress Members') }}
             </x-responsive-nav-link>
         </div>
 

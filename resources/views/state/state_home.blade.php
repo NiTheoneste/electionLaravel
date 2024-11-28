@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>State Home</title>
         <style>
+            body {
+                color: #dddddd;
+            }
             table {
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
@@ -18,7 +21,13 @@
         </style>
     </head>
     <body>
-        <h1 style="text-align: center;">States of the US</h1>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('States') }}
+            </h2>
+        </x-slot>
+    <h1 style="text-align: center;">States of the US</h1>
         @if($states->count() > 0 )
             <table class='table table-bordered table-responsive'>
                 <tr>
@@ -64,5 +73,6 @@
         <form method="GET" action="/state/add">
             <input type="submit" value="+ Add New State">
         </form>
+        </x-app-layout>
     </body>
 </html>
