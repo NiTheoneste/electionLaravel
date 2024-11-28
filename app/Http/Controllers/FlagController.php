@@ -26,7 +26,7 @@ class FlagController extends Controller implements HasMiddleware
     public function createAndAdd(Request $request){
         $request->validate(['flag_image' => ['required']]);
         Flag::create(['imageUrl'=>$request->flag_image]);
-        return redirect('/flag')->with('success', "Flag recorded");
+        return redirect('/flags')->with('success', "Flag recorded");
     }
 
     public function showEditPage($pk){
@@ -46,17 +46,13 @@ class FlagController extends Controller implements HasMiddleware
             $flag->imageUrl = $imageUrl;
             $flag->update();
         }
-        return redirect('/flag')->with('success', "Flag successfully updated");
+        return redirect('/flags')->with('success', "Flag successfully updated");
     }
-
-    public function showDeletePage(){
-        return view('flag/flag_delete');
-    }
-
+    
     public function delete($pk){
         $flag = Flag::find($pk);
         Storage::disk('public')->delete($flag->imageUrl);
         $flag->delete();
-        return redirect('/flag')->with('success', "Flag deleted successfully");
+        return redirect('/flags')->with('success', "Flag deleted successfully");
     }
 }

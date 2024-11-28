@@ -70,7 +70,7 @@
                 <button type="submit" class="btn btn-primary" name="btn-save">
                 <span class="glyphicon glyphicon-plus"></span> Create New Governor
                 </button>  
-                <a href="/governor" class="btn btn-large btn-success"><i class="glyphicon glyphicon-backward"></i> &nbsp; Back to list</a>
+                <a href="/governors" class="btn btn-large btn-success"><i class="glyphicon glyphicon-backward"></i> &nbsp; Back to list</a>
                 </td>
             </tr>
     

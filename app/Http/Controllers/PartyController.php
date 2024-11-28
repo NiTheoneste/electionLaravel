@@ -28,7 +28,7 @@ class PartyController extends Controller implements HasMiddleware
             'name' => ['required']
         ]);
         Party::create(['name'=>$request->name]);
-        return redirect('/party')->with('success', "Party recorded");
+        return redirect('/parties')->with('success', "Party recorded");
     }
 
     public function showEditPage($pk){
@@ -43,12 +43,12 @@ class PartyController extends Controller implements HasMiddleware
         $party = Party::find($pk);
         $party->name = $request->name;
         $party->update();
-        return redirect('/party')->with('success', "Party successfully updated");
+        return redirect('/parties')->with('success', "Party successfully updated");
     }
 
     public function delete($pk){
         $party = Party::find($pk);
         $party->delete();
-        return redirect('/party')->with('success', "Party deleted successfully");
+        return redirect('/parties')->with('success', "Party deleted successfully");
     }
 }

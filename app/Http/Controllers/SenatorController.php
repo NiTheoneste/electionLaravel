@@ -46,7 +46,7 @@ class SenatorController extends Controller implements HasMiddleware
             'state_id'=>$request->state,
             'party_id'=>$request->party
         ]);
-        return redirect('/senator')->with('success', "Senator recorded");
+        return redirect('/senators')->with('success', "Senator recorded");
     }
 
     public function showEditPage($pk){
@@ -74,16 +74,12 @@ class SenatorController extends Controller implements HasMiddleware
         $senator->state_id = $request->state;
         $senator->party_id = $request->party;
         $senator->update();
-        return redirect('/senator')->with('success', "Senator successfully updated");
-    }
-
-    public function showDeletePage($pk){
-        return view('senator/senator_delete');
+        return redirect('/senators')->with('success', "Senator successfully updated");
     }
 
     public function delete($pk){
         $senator = Senator::find($pk);
         $senator->delete();
-        return redirect('/senator')->with('success', "Senator deleted successfully");
+        return redirect('/senators')->with('success', "Senator deleted successfully");
     }
 }

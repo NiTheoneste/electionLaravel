@@ -66,7 +66,7 @@
                 <button type="submit" class="btn btn-primary" name="btn-save">
                 <span class="glyphicon glyphicon-plus"></span> Create New Presidential elector
                 </button>  
-                <a href="/presElector" class="btn btn-large btn-success"><i class="glyphicon glyphicon-backward"></i> &nbsp; Back to list</a>
+                <a href="/presElectors" class="btn btn-large btn-success"><i class="glyphicon glyphicon-backward"></i> &nbsp; Back to list</a>
                 </td>
             </tr>
     

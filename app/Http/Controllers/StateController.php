@@ -55,7 +55,7 @@ class StateController extends Controller implements HasMiddleware
         $flag = new Flag();
         $flag->imageUrl	 = $imageUrl;
         $state->flag()->save($flag);
-        return redirect('/state')->with('success', "State recorded");
+        return redirect('/states')->with('success', "State recorded");
     }
 
     public function showEditPage($pk){
@@ -90,13 +90,13 @@ class StateController extends Controller implements HasMiddleware
         $state->area = $request->area;
         $state->population = $request->population;
         $state->update();
-        return redirect('/state')->with('success', "State successfully updated");
+        return redirect('/states')->with('success', "State successfully updated");
     }
 
     public function delete($pk){
         $state = State::findOrFail($pk);
         Storage::disk('public')->delete($state->flag->imageUrl);
         $state->delete();
-        return redirect('/state')->with('success', "State deleted successfully");
+        return redirect('/states')->with('success', "State deleted successfully");
     }
 }

@@ -44,7 +44,7 @@ class GovernorController extends Controller implements HasMiddleware
             'state_id'=>$request->state,
             'party_id'=>$request->party
         ]);
-        return redirect('/governor')->with('success', "Governor recorded");
+        return redirect('/governors')->with('success', "Governor recorded");
     }
 
     public function showEditPage($pk){
@@ -64,7 +64,7 @@ class GovernorController extends Controller implements HasMiddleware
             'state'=>['required'],
             'party'=>['required']
         ]);
-        $governor = governor::find($pk);
+        $governor = Governor::find($pk);
         $governor->first_name = $request->first_name;
         $governor->last_name = $request->last_name;
         $governor->age = $request->age;
@@ -72,16 +72,12 @@ class GovernorController extends Controller implements HasMiddleware
         $governor->state_id = $request->state;
         $governor->party_id = $request->party;
         $governor->update();
-        return redirect('/governor')->with('success', "governor successfully updated");
-    }
-
-    public function showDeletePage($pk){
-        return view('governor/governor_delete');
+        return redirect('/governors')->with('success', "Governor successfully updated");
     }
 
     public function delete($pk){
         $governor = Governor::find($pk);
         $governor->delete();
-        return redirect('/governor')->with('success', "Senator deleted successfully");
+        return redirect('/governors')->with('success', "Governor deleted successfully");
     }
 }

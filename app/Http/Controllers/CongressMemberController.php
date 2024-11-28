@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CongressMember;
 use App\Models\Party;
-use App\Models\PresElector;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
-class PresElectorController extends Controller implements HasMiddleware
+class CongressMemberController extends Controller implements HasMiddleware
 {
     public static function middleware()
     {
@@ -17,46 +17,17 @@ class PresElectorController extends Controller implements HasMiddleware
     }
 
     public function showHome(){
-        $pres_electors = PresElector::all(); 
-        return view('preselector/preselector_home', ['pres_electors' => $pres_electors]);
+        $congress_members = CongressMember::all();
+        return view('congressmember/congressmember_home', ['congress_members' => $congress_members]);
     }
 
     public function showAddPage(){
         $states = State::all();
         $parties = Party::all();
-        return view('preselector/preselector_add', ['states' => $states, 'parties' => $parties]);
+        return view('congressmember/congressmember_add', ['states'=>$states, 'parties'=>$parties]);
     }
 
     public function createAndAdd(Request $request){
-        $request->validate([
-            //fields from pres_elector form
-            'first_name'=>['required', 'max:20', 'min:3'/*,'unique:pres_electors'*/],
-            'last_name'=>['required', 'max:20', 'min:3'],
-            'age'=>'required|integer|min:1',
-            'gender'=>['required'],
-            'state'=>['required'],
-            'party'=>['required']
-        ]);
-        PresElector::create([
-            //fields from DB => fields from form
-            'first_name'=>$request->first_name,
-            'last_name'=>$request->last_name,
-            'age'=>$request->age,
-            'gender'=>$request->gender,
-            'state_id'=>$request->state,
-            'party_id'=>$request->party
-        ]);
-        return redirect('/presElectors')->with('success', "Presidential Elector recorded");
-    }
-
-    public function showEditPage($pk){
-        $pres_elector = PresElector::findOrFail($pk);
-        $states = State::all();
-        $parties = Party::all();
-        return view('preselector/preselector_edit', ['pres_elector' => $pres_elector, 'states' => $states, 'parties' => $parties]);
-    }
-
-    public function update(Request $request, $pk){
         $request->validate([
             'first_name'=>['required', 'max:20', 'min:3'],
             'last_name'=>['required', 'max:20', 'min:3'],
@@ -65,20 +36,49 @@ class PresElectorController extends Controller implements HasMiddleware
             'state'=>['required'],
             'party'=>['required']
         ]);
-        $pres_elector = PresElector::find($pk);
-        $pres_elector->first_name = $request->first_name;
-        $pres_elector->last_name = $request->last_name;
-        $pres_elector->age = $request->age;
-        $pres_elector->gender = $request->gender;
-        $pres_elector->state_id = $request->state;
-        $pres_elector->party_id = $request->party;
-        $pres_elector->update();
-        return redirect('/presElectors')->with('success', "Presidential Elector successfully updated");
+        CongressMember::create([
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'age'=>$request->age,
+            'gender'=>$request->gender,
+            'state_id'=>$request->state,
+            'party_id'=>$request->party
+        ]);
+        return redirect('/congressMembers')->with('success', "Congress Member recorded");
+    }
+
+    public function showEditPage($pk){
+        $congress_member = CongressMember::Find($pk);
+        $states = State::all();
+        $parties = Party::all();
+        return view('congressmember/congressmember_edit', ['congress_member'=>$congress_member, 'states'=>$states, 'parties'=>$parties]);
+    }
+
+    public function update(Request $request, $pk){
+        $request->validate([
+            //fields from governor form
+            'first_name'=>['required', 'max:20', 'min:3'],
+            'last_name'=>['required', 'max:20', 'min:3'],
+            'age'=>'required|integer|min:1',
+            'gender'=>['required'],
+            'state'=>['required'],
+            'party'=>['required']
+        ]);
+        $congress_member = CongressMember::find($pk);
+        $congress_member->first_name = $request->first_name;
+        $congress_member->last_name = $request->last_name;
+        $congress_member->age = $request->age;
+        $congress_member->gender = $request->gender;
+        $congress_member->state_id = $request->state;
+        $congress_member->party_id = $request->party;
+        $congress_member->update();
+        return redirect('/congressMembers')->with('success', "Congress member successfully updated");
     }
 
     public function delete($pk){
-        $pres_elector = PresElector::find($pk);
-        $pres_elector->delete();
-        return redirect('/presElectors')->with('success', "Presidential Elector deleted successfully");
+        $congress_member = CongressMember::find($pk);
+        $congress_member->delete();
+        return redirect('/congressMembers')->with('success', "Congress member deleted successfully");
     }
+
 }
