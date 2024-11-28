@@ -18,4 +18,8 @@ class Governor extends Model
     public function party(){
         return $this->belongsTo(Party::class);
     }
+
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }

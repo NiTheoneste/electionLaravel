@@ -2,6 +2,31 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+        <!-- Role -->
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Role')" />
+            <select id="role" name="role" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                <option value="" disabled selected>{{ __('Select a role') }}</option>
+                <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                <option value="Governor" {{ old('role') == 'Governor' ? 'selected' : '' }}>Governor</option>
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
+        <!-- Governor -->
+        <div id="governor-container" class="mt-4 hidden">
+            <x-input-label for="governor" :value="__('Governor')" />
+            <select id="governor" name="governor_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="" disabled selected>{{ __('Select a governor') }}</option>
+                @foreach($governors as $governor)
+                    <option value="{{$governor->id}}">
+                        Governor of {{$governor->state->name}}: {{$governor->first_name}} {{$governor->last_name}}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('governor')" class="mt-2" />
+        </div>
+
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -49,4 +74,34 @@
             </x-primary-button>
         </div>
     </form>
+
+    <!-- JavaScript -->
+    <script>
+        const governors = <?php echo json_encode($governors) ?>;
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.getElementById('role');
+            const governorContainer = document.getElementById('governor-container');
+            const governorSelect = document.getElementById('governor');
+            const nameField = document.getElementById('name');
+
+            roleSelect.addEventListener('change', function () {
+                if (roleSelect.value === 'Governor') {
+                    governorContainer.classList.remove('hidden');
+                    nameField.value = '';
+                    nameField.readOnly = true;
+                } else {
+                    governorContainer.classList.add('hidden');
+                    nameField.value = '';
+                    nameField.readOnly = false;
+                    governorSelect.value = null;
+                }
+            });
+
+            governorSelect.addEventListener('change', function () {
+                const selectedGovernor = parseInt(governorSelect.value);
+                const governor = governors.find(g => g.id === selectedGovernor);
+                nameField.value = governor.first_name + ' ' + governor.last_name;
+            })
+        });
+    </script>
 </x-guest-layout>
